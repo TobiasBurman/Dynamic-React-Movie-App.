@@ -8,10 +8,11 @@ const MovieApi = () => {
     const [movies, setMovies] = useState([]);
     const [search, setSearch] = useState("")
     const [error, setError] = useState('');
+    const [type, setType] = useState("")
   const getMovies = async (search) => {
     try {
       const response = await fetch(
-        `https://www.omdbapi.com/?i=tt3896198&apikey=21adb06f&s=${search}`
+        `https://www.omdbapi.com/?i=tt3896198&apikey=21adb06f&s=${search}&type=${type}`
       );
       const moviesResponse = await response.json();
       if (moviesResponse.Search) {
@@ -30,12 +31,12 @@ const MovieApi = () => {
 
   useEffect(() => {
     getMovies(search);
-  }, [search]);
+  }, [search, type]);
 
   return (
   <div className="container-fluid movie-app">
     <div className="row">
-    <Form  search = {search} setSearch={setSearch}/><p>{error}</p>
+    <Form  search = {search} setSearch={setSearch}type={type}setType={setType}/><p>{error}</p>
     <MovieList movies={movies} />
     </div>
   </div>
