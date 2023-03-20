@@ -1,8 +1,12 @@
 import React from 'react'
 
-const Form = () => {
+const Form = (props) => {
   return (
-    <div>Form</div>
+    <div>
+       <input type="text" value={props.value}
+        onChange={ (e) => props.setSearch(e.target.value)}
+         placeholder='Search a movie...' /> 
+    </div>
   )
 }
 
