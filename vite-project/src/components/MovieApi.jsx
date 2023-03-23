@@ -1,15 +1,16 @@
 import React from "react";
 import Form from "./Form";
 import MovieList from "./MovieList";
+import styles from "./movieStyle.module.css"
 import { useState, useEffect } from 'react'
 
 
 const MovieApi = () => {
     const [movies, setMovies] = useState([]);
-    const [search, setSearch] = useState("")
+    const [search, setSearch] = useState("marvel")
     const [error, setError] = useState('');
     const [type, setType] = useState("")
-  const getMovies = async (search) => {
+  const getMovies = async () => {
     try {
       const response = await fetch(
         `https://www.omdbapi.com/?i=tt3896198&apikey=21adb06f&s=${search}&type=${type}`
@@ -33,12 +34,14 @@ const MovieApi = () => {
     getMovies(search);
   }, [search, type]);
 
+
   return (
-  <div className="container-fluid movie-app">
-    <div className="row">
-    <Form  search = {search} setSearch={setSearch}type={type}setType={setType}/><p>{error}</p>
-    <MovieList movies={movies} />
+  <div className="">
+    <div className="">
+    <Form  search = {search} setSearch={setSearch}type={type}setType={setType}/><p className={styles.error}>{error}</p>
     </div>
+    
+    <MovieList movies={movies} />
   </div>
   );
 };
